@@ -76,7 +76,7 @@ class SystemReportManager {
             // Reset values
             document.getElementById("SR_ECPCount").innerText = "";
             document.getElementById("SR_TotalTeamScores").innerText = "";
-            document.getElementById("SR_PlayerList").innerText = "";
+            document.getElementById("SR_PlayerList").innerHTML = "";
 
             // async fetch game info from static api
             if (!self.prefetchedInfo[`${system.id}@${system.address}`]) self.prefetch(systemFetcher);
@@ -108,8 +108,19 @@ class SystemReportManager {
                     } else {
                         document.getElementById("SR_ECPCount").innerText = String(ecpCount);
                     }
-                    document.getElementById("SR_PlayerList").innerText = playerList.join(", ").replaceAll("\u202E", "");
-                }
+                     // Modification ici pour appliquer le style aux noms
+                let playerListHTML = playerList.map(playerName => {
+                    let sanitizedPlayerName = playerName.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\u202E/g, "");
+
+                    if (playerName.toLowerCase().includes('ℭ')) {
+                        return `<span style="color: red; font-weight: bold;">${sanitizedPlayerName}</span>`;
+                    } else {
+                        return sanitizedPlayerName;
+                    }
+                }).join(", ");
+
+                document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
+            }
             })
         } else {
             document.getElementById("SR_StaticAPIRequired").style.display = "none";
