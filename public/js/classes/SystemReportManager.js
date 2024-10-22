@@ -174,49 +174,54 @@ class SystemReportManager {
                                 String(ecpCount);
                         }
 
-                        // Séparer les joueurs avec tags de clan et les autres
-                        let taggedPlayers = playerList.filter(playerName => {
-                            for (let tag in clanTags) {
-                                if (playerName.includes(tag)) {
-                                    return true;
-                                }
+                         // Séparer les joueurs avec le tag "ℭ"
+                    let cursedPlayers = playerList.filter(playerName => playerName.includes("ℭ"));
+
+                    // Séparer les autres joueurs avec tags de clan (excluant "ℭ")
+                    let otherTaggedPlayers = playerList.filter(playerName => {
+                        if (playerName.includes("ℭ")) return false;
+                        for (let tag in clanTags) {
+                            if (playerName.includes(tag)) {
+                                return true;
                             }
-                            return false;
-                        });
+                        }
+                        return false;
+                    });
 
-                        let otherPlayers = playerList.filter(playerName => {
-                            for (let tag in clanTags) {
-                                if (playerName.includes(tag)) {
-                                    return false;
-                                }
+                    // Séparer les joueurs sans aucun tag de clan
+                    let otherPlayers = playerList.filter(playerName => {
+                        for (let tag in clanTags) {
+                            if (playerName.includes(tag)) {
+                                return false;
                             }
-                            return true;
-                        });
+                        }
+                        return true;
+                    });
 
-                         // Créer une liste ordonnée avec les joueurs "NT" en premier
-                         let orderedPlayerList = [...taggedPlayers, ...otherPlayers];
+                    // Créer une liste ordonnée avec les "ℭ" en premier
+                    let orderedPlayerList = [...cursedPlayers, ...otherTaggedPlayers, ...otherPlayers];
 
-                        // Construire la chaîne HTML avec mise en forme
-                        let playerListHTML = orderedPlayerList.map(playerName => {
-                            // Échapper les caractères spéciaux pour éviter les problèmes de sécurité
-                            let sanitizedPlayerName = playerName
-                                .replace(/</g, "&lt;")
-                                .replace(/>/g, "&gt;")
-                                .replace(/\u202E/g, "");
+                    // Construire la chaîne HTML avec mise en forme
+                    let playerListHTML = orderedPlayerList.map(playerName => {
+                        // Échapper les caractères spéciaux pour éviter les problèmes de sécurité
+                        let sanitizedPlayerName = playerName
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/\u202E/g, "");
 
-                            // Vérifier si le joueur a un tag de clan
-                            for (let tag in clanTags) {
-                                if (playerName.includes(tag)) {
-                                    let color = clanTags[tag];
-                                    return `<span style="color: ${color} !important; font-weight: bolder !important;">${sanitizedPlayerName}</span>`;
-                                }
+                        // Vérifier si le joueur a un tag de clan
+                        for (let tag in clanTags) {
+                            if (playerName.includes(tag)) {
+                                let color = clanTags[tag];
+                                return `<span style="color: ${color} !important; font-weight: bolder !important;">${sanitizedPlayerName}</span>`;
                             }
+                        }
 
-                            // Si aucun tag de clan n'est trouvé, retourner le nom sans style
-                            return sanitizedPlayerName;
-                        }).join(", ");
+                        // Si aucun tag de clan n'est trouvé, retourner le nom sans style
+                        return sanitizedPlayerName;
+                    }).join(", ");
 
-                        document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
+                    document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
                     }
                 }
             );
