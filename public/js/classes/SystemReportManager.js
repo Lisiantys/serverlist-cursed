@@ -174,21 +174,39 @@ class SystemReportManager {
                                 String(ecpCount);
                         }
 
-                         // Séparer les joueurs avec le tag "ℭ"
+
+                    // Collecter les joueurs avec le tag "ℭ"
                     let cursedPlayers = playerList.filter(playerName => playerName.includes("ℭ"));
 
-                    // Séparer les autres joueurs avec tags de clan (excluant "ℭ")
-                    let otherTaggedPlayers = playerList.filter(playerName => {
-                        if (playerName.includes("ℭ")) return false;
-                        for (let tag in clanTags) {
+                    // Créer un objet pour regrouper les joueurs par tag (excluant "ℭ")
+                    let tagToPlayers = {};
+
+                    // Liste des tags (excluant "ℭ") dans l'ordre souhaité
+                    let otherTags = Object.keys(clanTags).filter(tag => tag !== "ℭ");
+
+                    // Initialiser l'objet avec des tableaux vides pour chaque tag
+                    for (let tag of otherTags) {
+                        tagToPlayers[tag] = [];
+                    }
+
+                    // Parcourir les noms des joueurs pour les regrouper par tag
+                    for (let playerName of playerList) {
+                        // Ignorer les joueurs avec le tag "ℭ"
+                        if (playerName.includes("ℭ")) continue;
+
+                        let foundTag = null;
+                        for (let tag of otherTags) {
                             if (playerName.includes(tag)) {
-                                return true;
+                                foundTag = tag;
+                                break; // Arrêter à la première correspondance de tag
                             }
                         }
-                        return false;
-                    });
+                        if (foundTag) {
+                            tagToPlayers[foundTag].push(playerName);
+                        }
+                    }
 
-                    // Séparer les joueurs sans aucun tag de clan
+                    // Récupérer les joueurs sans aucun tag
                     let otherPlayers = playerList.filter(playerName => {
                         for (let tag in clanTags) {
                             if (playerName.includes(tag)) {
@@ -198,8 +216,19 @@ class SystemReportManager {
                         return true;
                     });
 
-                    // Créer une liste ordonnée avec les "ℭ" en premier
-                    let orderedPlayerList = [...cursedPlayers, ...otherTaggedPlayers, ...otherPlayers];
+                    // Créer la liste ordonnée des joueurs
+                    let orderedPlayerList = [];
+
+                    // Ajouter les joueurs avec le tag "ℭ" en premier
+                    orderedPlayerList.push(...cursedPlayers);
+
+                    // Ajouter les joueurs des autres tags, regroupés par tag
+                    for (let tag of otherTags) {
+                        orderedPlayerList.push(...tagToPlayers[tag]);
+                    }
+
+                    // Ajouter les joueurs sans tag
+                    orderedPlayerList.push(...otherPlayers);
 
                     // Construire la chaîne HTML avec mise en forme
                     let playerListHTML = orderedPlayerList.map(playerName => {
@@ -222,9 +251,9 @@ class SystemReportManager {
                     }).join(", ");
 
                     document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
-                    }
                 }
-            );
+            }
+        );
         } else {
             document.getElementById("SR_StaticAPIRequired").style.display = "none";
             document.getElementById("systemSpectateButton").style.display = "none";
