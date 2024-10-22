@@ -1,0 +1,10 @@
+{
+  "site": {
+    "analytics": {
+      "enabled": false
+    },
+    "mode": "live",
+    "live-api-provider": "wss://starblast.dankdmitron.dev/api/",
+    "static-api-provider": "https://starblast.dankdmitron.dev/api/"
+  }
+}

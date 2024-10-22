@@ -1,0 +1,170 @@
+/* Fonts */
+@font-face {
+    font-family: "Nunito Sans Bold";
+    src: url("../fonts/Nunito_Sans/NunitoSans-ExtraBold.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SBGlyphs';
+    src: url('../fonts/Starblast/starblast-glyphs.ttf');
+    font-weight: normal;
+    font-style: normal
+}
+
+.font-nunito-sans-bold {
+    font-family: "Nunito Sans Bold", sans-serif;
+}
+
+@font-face {
+    font-family: "Nunito Sans";
+    src: url("../fonts/Nunito_Sans/NunitoSans-Regular.ttf");
+    font-display: swap;
+}
+
+.font-nunito-sans {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+/* Starblast Ship Fonts */
+
+@font-face {
+    font-family: "Starblast Vanilla Ships";
+    src: url("../fonts/Starblast/starblast-vanilla-ships.ttf");
+    font-display: swap;
+}
+
+.ship-icon-vanilla {
+    font-family: "Starblast Vanilla Ships", sans-serif;
+}
+
+@font-face {
+    font-family: "Starblast Intrusion Ships";
+    src: url("../fonts/Starblast/starblast-intrusion-ships.ttf");
+    font-display: swap;
+}
+
+.ship-icon-intrusion {
+    font-family: "Starblast Intrusion Ships", sans-serif;
+}
+
+@font-face {
+    font-family: "Starblast U-Series Ships";
+    src: url("../fonts/Starblast/starblast-useries-ships.ttf");
+    font-display: swap;
+}
+
+.ship-icon-useries {
+    font-family: "Starblast U-Series Ships", sans-serif;
+}
+
+@font-face {
+    font-family: "Starblast Nautic Ships";
+    src: url("../fonts/Starblast/starblast-nautic-ships.ttf");
+    font-display: swap;
+}
+
+.ship-icon-nautic {
+    font-family: "Starblast Nautic Ships", sans-serif;
+}
+
+/* Text Styling */
+
+body {
+    font-family: "Nunito Sans", sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+h1, h2, h3, h4, h5, b {
+    font-family: "Nunito Sans Bold", sans-serif;
+}
+
+/* Navbar Styling */
+
+.nav-icon {
+    font-size: 1.25rem;
+}
+
+.nav-link:hover {
+    color: #555555;
+    cursor: pointer;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+/* System List Styling */
+
+.system-list-item:hover {
+    border-color: red;
+    cursor: pointer;
+}
+
+/* System Info Styling */
+
+#systemCopyLink, #systemSpectateButton {
+    min-width: 3rem;
+    max-width: 3rem;
+}
+
+.system-report-card:hover {
+    border-color: red;
+}
+
+/* Scrollification */
+
+#systemReport, #systemsListContainer, #viewOptions {
+    overflow-y: auto;
+    height: fit-content;
+}
+
+#settingsModal, #spectatorModal, #aboutModal {
+    overflow-y: hidden;
+}
+
+.analysis-col {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.analysis-col::-webkit-scrollbar {
+    display: none;
+}
+/* Player box */
+.player-view-box {
+    display: flex;
+    align-items: center;
+    overflow: auto hidden;
+    margin-bottom: 0.5rem;
+}
+
+span.ship-name {
+    width: 70%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+span.ship-score {
+    width: 30%;
+    text-align: right;
+    white-space: nowrap;
+    overflow: auto hidden;
+}
+
+/* Player Highlighting */
+
+.player-view-box:hover, .highlighted {
+    cursor: pointer;
+    color: var(--spectate-leaderboard-highlighting-color);
+}
+
+.highlighted {
+    color: var(--spectate-leaderboard-highlighting-color);
+}
+
+/* Custom Game Modal */
+#customGameLinkInput {
+    font-family: monospace;
+}

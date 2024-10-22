@@ -1,0 +1,27 @@
+body {
+    color-scheme: light;
+}
+
+:root {
+    --background-color: white;
+    --spectate-background-color: transparent;
+    --spectate-asteroids-color: black;
+    --spectate-player-highlighting-color: black;
+    --spectate-leaderboard-highlighting-color: yellow;
+    --text-color: black;
+    --ship-icons-filter: invert(1);
+}
+
+::-webkit-scrollbar {
+    width: 0.1rem;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 0.25rem;
+    border: 0.25rem solid #cccccc;
+}
