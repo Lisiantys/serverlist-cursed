@@ -39,7 +39,40 @@ class SystemReportManager {
         }
     }
 
+ 
+
     showInfo(systemFetcher) {
+
+        const clanTags = {
+            "NUB": "orange",
+            "ULU": "purple",
+            "S&C": "DeepSkyBlue",
+            "FR": "blue",
+            "PTP": "green",
+            "P͠T͠P͠": "green",
+            "CK": "teal",
+            "TNM": "magenta",
+            "ALONE": "brown",
+            "GOF": "lime",
+            "GL": "navy",
+            "ℭ": "red",
+            "7҉": "gold",
+            "ɆØ₮": "cyan",
+            "☪.": "pink",
+            "SᄅF̶": "darkgreen",
+            "ASE": "maroon",
+            "KOR": "crimson",
+            "LAF": "olive",
+            "❮⌥Ƒᔦ❯": "darkorange",
+            "⌥Ƒ౺": "darkorange",
+            "F℣": "darkred",
+            "G4": "indigo",
+            "ARC": "darkcyan",
+            "SR": "black",
+            "🔥IŞ": "darksalmon",
+            "VN": "grey",
+        };
+        
         const self = this;
 
         let system = systemFetcher();
@@ -141,16 +174,27 @@ class SystemReportManager {
                                 String(ecpCount);
                         }
 
-                        // Séparer les joueurs contenant "NT" et les autres
-                        let ntPlayers = playerList.filter(playerName =>
-                            playerName.toLowerCase().includes('ℭ')
-                        );
-                        let otherPlayers = playerList.filter(playerName =>
-                            !playerName.toLowerCase().includes('ℭ')
-                        );
+                        // Séparer les joueurs avec tags de clan et les autres
+                        let taggedPlayers = playerList.filter(playerName => {
+                            for (let tag in clanTags) {
+                                if (playerName.includes(tag)) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        });
+
+                        let otherPlayers = playerList.filter(playerName => {
+                            for (let tag in clanTags) {
+                                if (playerName.includes(tag)) {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        });
 
                          // Créer une liste ordonnée avec les joueurs "NT" en premier
-                        let orderedPlayerList = [...ntPlayers, ...otherPlayers];
+                         let orderedPlayerList = [...taggedPlayers, ...otherPlayers];
 
                         // Construire la chaîne HTML avec mise en forme
                         let playerListHTML = orderedPlayerList.map(playerName => {
@@ -160,12 +204,16 @@ class SystemReportManager {
                                 .replace(/>/g, "&gt;")
                                 .replace(/\u202E/g, "");
 
-                            // Appliquer la couleur bleue aux joueurs contenant "NT"
-                            if (playerName.toLowerCase().includes('ℭ')) {
-                                return `<span style="color: red !important;">${sanitizedPlayerName}</span>`;
-                            } else {
-                                return sanitizedPlayerName;
+                            // Vérifier si le joueur a un tag de clan
+                            for (let tag in clanTags) {
+                                if (playerName.includes(tag)) {
+                                    let color = clanTags[tag];
+                                    return `<span style="color: ${color} !important; font-weight: bolder !important;">${sanitizedPlayerName}</span>`;
+                                }
                             }
+
+                            // Si aucun tag de clan n'est trouvé, retourner le nom sans style
+                            return sanitizedPlayerName;
                         }).join(", ");
 
                         document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
