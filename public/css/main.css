@@ -608,3 +608,19 @@ canvas{
   background-color: white;
   border-radius: 0.375rem;
 }
+
+@media (max-width: 460px) {
+  /* Pour mobile */
+  #viewOptions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .region-mode-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem; 
+  }
+}
