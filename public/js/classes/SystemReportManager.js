@@ -93,6 +93,7 @@ class SystemReportManager {
       "ŁS": { tags: ["ŁS"], color: "#FF1493" },
       "ᘖ࿐": { tags: ["ᘖ࿐"], color: "#87CEEB" },
       "₩ØȻ": { tags: ["₩ØȻ"], color: "#F00F03" },
+      "ROW": { tags: ["RᴏW"], color: "#A6A6A6" },
     };
 
     const self = this;
@@ -245,7 +246,7 @@ class SystemReportManager {
             "ℭ", "GOF", "NUB", "ƲԼƲ", "S&C", "FЯ", "PTP", "P͠T͠P͠", "Cᴋ",
             "ƬƝⱮ", "ALONE", "₲Ⱡ", "7҉", "ɆØ₮", "☪", "SᄅF̶", "ΛꞨΞ",
             "KOR", "Ⱡ₳₣", "⌥Ƒ", "F℣", "G4", "ΛꞚC", "SR", "🔥IŞ", "VN",
-            "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ",
+            "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ", "ROW"
             // Ajoutez les autres clans si nécessaire
         ];
 
