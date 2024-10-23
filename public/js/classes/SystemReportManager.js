@@ -47,10 +47,11 @@ class SystemReportManager {
             "NUB": "orange",
             "ULU": "purple",
             "S&C": "DeepSkyBlue",
-            "FR": "blue",
+            "FЯ▸": "blue",
+            "ҒꝚ▸": "blue",
             "PTP": "green",
             "P͠T͠P͠": "green",
-            "CK": "teal",
+            "Cᴋ": "teal",
             "TNM": "magenta",
             "ALONE": "brown",
             "GOF": "lime",
@@ -58,12 +59,13 @@ class SystemReportManager {
             "ℭ": "red",
             "7҉": "gold",
             "ɆØ₮": "cyan",
-            "☪.": "pink",
+            "☪": "pink",
             "SᄅF̶": "darkgreen",
-            "ASE": "maroon",
+            "ΛꞨΞ": "maroon",
             "KOR": "crimson",
             "LAF": "olive",
             "❮⌥Ƒᔦ❯": "darkorange",
+            "⌥Ƒᔦ": "darkorange",
             "⌥Ƒ౺": "darkorange",
             "F℣": "darkred",
             "G4": "indigo",
@@ -71,6 +73,10 @@ class SystemReportManager {
             "SR": "black",
             "🔥IŞ": "darksalmon",
             "VN": "grey",
+            "L̴N̴D̴": "black",
+            "ȻS": "#00F0DC",
+            "YΛ" : "white",
+            "ŁS" : "red"
         };
         
         const self = this;
@@ -175,6 +181,14 @@ class SystemReportManager {
                         }
 
 
+                    // Fonction pour échapper les caractères spéciaux
+                    function sanitizePlayerName(playerName) {
+                        return playerName
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/\u202E/g, "");
+                    }
+
                     // Collecter les joueurs avec le tag "ℭ"
                     let cursedPlayers = playerList.filter(playerName => playerName.includes("ℭ"));
 
@@ -197,6 +211,7 @@ class SystemReportManager {
                         let foundTag = null;
                         for (let tag of otherTags) {
                             if (playerName.includes(tag)) {
+                                // Correspondance exacte du tag
                                 foundTag = tag;
                                 break; // Arrêter à la première correspondance de tag
                             }
@@ -216,39 +231,50 @@ class SystemReportManager {
                         return true;
                     });
 
-                    // Créer la liste ordonnée des joueurs
-                    let orderedPlayerList = [];
+                    // Construire la chaîne HTML
+                    let playerListHTML = '';
 
-                    // Ajouter les joueurs avec le tag "ℭ" en premier
-                    orderedPlayerList.push(...cursedPlayers);
-
-                    // Ajouter les joueurs des autres tags, regroupés par tag
-                    for (let tag of otherTags) {
-                        orderedPlayerList.push(...tagToPlayers[tag]);
+                    // Ajouter les joueurs du clan "ℭ" s'il y en a
+                    if (cursedPlayers.length > 0) {
+                        let color = 'red';
+                        let styledTag = `<span style="color: ${color} !important; font-weight: bolder !important;">ℭ (${cursedPlayers.length}):</span>`;
+                        
+                        let cursedPlayerNames = cursedPlayers.map(playerName => {
+                            let sanitizedPlayerName = sanitizePlayerName(playerName);
+                            return `<span style="color: ${color} !important; font-weight: bolder !important;">${sanitizedPlayerName}</span>`;
+                        }).join(', ');
+                    
+                        playerListHTML += `<div>${styledTag} ${cursedPlayerNames}</div>`;
                     }
 
-                    // Ajouter les joueurs sans tag
-                    orderedPlayerList.push(...otherPlayers);
-
-                    // Construire la chaîne HTML avec mise en forme
-                    let playerListHTML = orderedPlayerList.map(playerName => {
-                        // Échapper les caractères spéciaux pour éviter les problèmes de sécurité
-                        let sanitizedPlayerName = playerName
-                            .replace(/</g, "&lt;")
-                            .replace(/>/g, "&gt;")
-                            .replace(/\u202E/g, "");
-
-                        // Vérifier si le joueur a un tag de clan
-                        for (let tag in clanTags) {
-                            if (playerName.includes(tag)) {
-                                let color = clanTags[tag];
+                    // Ajouter les joueurs des autres tags
+                    for (let tag of otherTags) {
+                        let playersWithTag = tagToPlayers[tag];
+                        if (playersWithTag.length > 0) {
+                            let color = clanTags[tag];
+                            
+                            // Styliser le tag et le compteur
+                            let styledTag = `<span style="color: ${color} !important; font-weight: bolder !important;">${tag} (${playersWithTag.length}):</span>`;
+                    
+                            let playerNames = playersWithTag.map(playerName => {
+                                let sanitizedPlayerName = sanitizePlayerName(playerName);
                                 return `<span style="color: ${color} !important; font-weight: bolder !important;">${sanitizedPlayerName}</span>`;
-                            }
+                            }).join(', ');
+                    
+                            playerListHTML += `<div>${styledTag} ${playerNames}</div>`;
                         }
+                    }
+                    
 
-                        // Si aucun tag de clan n'est trouvé, retourner le nom sans style
-                        return sanitizedPlayerName;
-                    }).join(", ");
+                    // Ajouter les joueurs sans tag
+                    if (otherPlayers.length > 0) {
+                        let otherPlayerNames = otherPlayers.map(playerName => {
+                            let sanitizedPlayerName = sanitizePlayerName(playerName);
+                            return sanitizedPlayerName;
+                        }).join(', ');
+
+                        playerListHTML += `<div>${otherPlayerNames}</div>`;
+                    }
 
                     document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
                 }
