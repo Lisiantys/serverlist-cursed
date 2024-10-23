@@ -39,44 +39,41 @@ class SystemReportManager {
         }
     }
 
- 
-
     showInfo(systemFetcher) {
 
         const clanTags = {
-            "NUB": "orange",
-            "ULU": "purple",
-            "S&C": "DeepSkyBlue",
-            "FЯ▸": "blue",
-            "ҒꝚ▸": "blue",
-            "PTP": "green",
-            "P͠T͠P͠": "green",
-            "Cᴋ": "teal",
-            "TNM": "magenta",
-            "ALONE": "brown",
-            "GOF": "lime",
-            "GL": "navy",
-            "ℭ": "red",
-            "7҉": "gold",
-            "ɆØ₮": "cyan",
-            "☪": "pink",
-            "SᄅF̶": "darkgreen",
-            "ΛꞨΞ": "maroon",
-            "KOR": "crimson",
-            "LAF": "olive",
-            "❮⌥Ƒᔦ❯": "darkorange",
-            "⌥Ƒᔦ": "darkorange",
-            "⌥Ƒ౺": "darkorange",
-            "F℣": "darkred",
-            "G4": "indigo",
-            "ARC": "darkcyan",
-            "SR": "black",
-            "🔥IŞ": "darksalmon",
-            "VN": "grey",
-            "L̴N̴D̴": "black",
-            "ȻS": "#00F0DC",
-            "YΛ" : "white",
-            "ŁS" : "red"
+            "NUB": "#FFA500", // Orange
+            "ULU": "#800080", // Purple
+            "S&C": "#00BFFF", // DeepSkyBlue
+            "FЯ▸": "#4682B4", // SteelBlue
+            "ҒꝚ▸": "#87CEEB", // SkyBlue
+            "PTP": "#32CD32", // LimeGreen
+            "P͠T͠P͠": "#3CB371", // MediumSeaGreen
+            "Cᴋ": "#40E0D0", // Turquoise
+            "TNM": "#FF00FF", // Magenta
+            "ALONE": "#CD853F", // Peru
+            "GOF": "#00FF00", // Lime
+            "GL": "#1E90FF", // Blue
+            "ℭ": "#FF0000", // Red (Cursed)
+            "7҉": "#FFD700", // Gold
+            "ɆØ₮": "#00FFFF", // Aqua
+            "☪": "#FF69B4", // HotPink
+            "SᄅF̶": "#ADFF2F", // GreenYellow
+            "ΛꞨΞ": "#FF4500", // OrangeRed
+            "KOR": "#DC143C", // Crimson
+            "LAF": "#9ACD32", // YellowGreen
+            "⌥Ƒᔦ": "#FF8C00", // DarkOrange
+            "⌥Ƒ౺": "#FF8C00", // DarkOrange
+            "F℣": "#FF6347", // Tomato
+            "G4": "#4B0082", // Indigo
+            "ARC": "#20B2AA", // LightSeaGreen
+            "SR": "#808080", // Grey
+            "🔥IŞ": "#FF7F50", // Coral
+            "VN": "#D3D3D3", // LightGray
+            "L̴N̴D̴": "#A9A9A9", // DarkGray
+            "ȻS": "#00F0DC", // Custom Cyan
+            "YΛ": "#FFFFE0", // LightYellow
+            "ŁS": "#FF1493" // DeepPink
         };
         
         const self = this;

@@ -3,12 +3,11 @@ body {
 }
 
 :root {
-    --background-color: white;
     --spectate-background-color: transparent;
     --spectate-asteroids-color: black;
     --spectate-player-highlighting-color: black;
     --spectate-leaderboard-highlighting-color: yellow;
-    --text-color: black;
+    --text-color: #0d1d31;
     --ship-icons-filter: invert(1);
 }
 
