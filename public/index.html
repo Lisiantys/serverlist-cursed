@@ -72,7 +72,7 @@
 
     <!-- Baked-in Site Config -->
     <script type="text/javascript">
-      window.siteConfig = {"analytics":{"enabled":false},"mode":"live","live-api-provider":"wss://starblast.dankdmitron.dev/api/","static-api-provider":"https://starblast.dankdmitron.dev/api/","revisionTime":"1729684414"};
+      window.siteConfig = {"analytics":{"enabled":false},"mode":"live","live-api-provider":"wss://starblast.dankdmitron.dev/api/","static-api-provider":"https://starblast.dankdmitron.dev/api/","revisionTime":"1729686367"};
     </script>
   </head>
   <body>
@@ -138,7 +138,7 @@
       <!-- Navbar -->
       <nav class="navbar" id="navbar">
         <div class="container-fluid px-0">
-          <h1 class="navbar-brand"> ℭursedList v1.0 </h1>
+          <h1 class="navbar-brand"> ℭursedList v1.0.3 </h1>
           <a
             class="me-2 nav-link nav-icon bi bi-gear-fill"
             id="navbarSettingsButton"
@@ -307,9 +307,11 @@
                 <h3>-</h3>
                 <h3 id="SR_Time">69 min</h3><br />
               </div>
-              <div id="SR_StaticAPIRequired">
-                <b class="float-start">ECP Count</b
-                ><span class="float-end" id="SR_ECPCount">70</span><br />
+              <div id="SR_StaticAPIRequired" class="d-flex flex-column">
+                <div>
+                  <b class="float-start">ECP Count</b
+                  ><span class="float-end" id="SR_ECPCount">70</span><br />
+                </div>
                 <div id="SR_TeamModeRequired">
                   <b class="float-start">Total Team Scores</b
                   ><span class="float-end" id="SR_TotalTeamScores">70</span
@@ -323,10 +325,12 @@
                   <br />
                 </div>
 
-                <b class="float-start">Players : </b>
-                <span class="float-end" id="SR_PlayerCount"> 70</span>
-                <span class="float-end" id="SR_PlayerList">70</span>
-                <br />
+                <div>
+                  <b class="float-start">Players : </b>
+                  <span class="float-end" id="SR_PlayerCount"> 70</span>
+                  <span class="float-end" id="SR_PlayerList">70</span>
+                  <br />
+                </div>
               </div>
               <div class="btn-group w-100 mt-3">
                 <button class="btn btn-outline-danger" id="systemCopyLink">

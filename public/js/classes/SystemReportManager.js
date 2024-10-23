@@ -41,17 +41,19 @@ class SystemReportManager {
 
   showInfo(systemFetcher) {
     const clanTags = {
+      "ᘜA̷ᖇ": "#FFF000",
       "NUB": "#FFA500", // Orange
-      "ULU": "#800080", // Purple
+      "ƲԼƲ": "#800080", // Purple
       "S&C": "#00BFFF", // DeepSkyBlue
       "FЯ": "#4682B4", // SteelBlue
-      "ҒꝚ": "#87CEEB", // SkyBlue
+      "ҒꝚ": "#4682B4", // SteelBlue
       "PTP": "#32CD32", // LimeGreen
       "P͠T͠P͠": "#3CB371", // MediumSeaGreen
       "Cᴋ": "#40E0D0", // Turquoise
-      "TNM": "#FF00FF", // Magenta
+      "ƬƝⱮ": "#FF00FF", // Magenta
       "ALONE": "#CD853F", // Peru
       "GOF": "#00FF00", // Lime
+      "ɢᴏҒ": "#00FF00", // Lime
       "₲Ⱡ": "#1E90FF", // Blue
       "ℭ": "#FF0000", // Red (Cursed)
       "7҉": "#FFD700", // Gold
@@ -76,7 +78,7 @@ class SystemReportManager {
       "ȻS": "#00F0DC", // Custom Cyan
       "YΛ": "#FFFFE0", // LightYellow
       "ŁS": "#FF1493", // DeepPink
-      "ᘖ࿐": "#F01003", 
+      "ᘖ࿐": "#87CEEB", 
       "₩ØȻ": "#F00F03", 
     };
 
