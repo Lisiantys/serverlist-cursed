@@ -11,7 +11,7 @@ window.initECPSetup = function(initializer){
             if (null != this.image) return this.image.src = this.canvas.toDataURL()
         }, t.prototype.IOl1I = function() {
             var t, e, i, s, n;
-            if (null == this.canvas && (this.canvas = document.createElement("canvas")), n = this.canvas.width = 2 * this.size, s = this.canvas.height = this.size, e = this.canvas.getContext("2d"), e.clearRect(0, 0, this.canvas.width, this.canvas.height), "blank" !== this.info.id) return e.fillStyle = "#000", e.beginPath(), e.arc(n / 2, s / 2, s / 2, 0, 2 * Math.PI, !0), e.fill(), e.beginPath(), e.moveTo(.05 * n, .25 * s), e.lineTo(.05 * n, .75 * s), e.lineTo(n / 2, .9 * s), e.lineTo(.95 * n, .75 * s), e.lineTo(.95 * n, .25 * s), e.lineTo(n / 2, .1 * s), e.closePath(), e.fill(), e.lineWidth = .07 * s, e.globalCompositeOperation = "destination-out", e.strokeStyle = "#000", e.beginPath(), e.arc(n / 2, s / 2, .6 * s, 0, 2 * Math.PI, !0), e.stroke(), this.drawMaterial(e, n, s), this.drawIcon(e, n, s), this.drawLaser(e, n, s), e.globalCompositeOperation = "source-atop", e.save(), e.translate(n / 2, s / 2), e.scale(n / 2, s / 2), i = e.createRadialGradient(0, 0, 0, 0, 0, 1), i.addColorStop(0, "rgba(255,255,255,.2)"), i.addColorStop(1, "rgba(0,0,0,.2)"), e.fillStyle = i, e.fillRect(-1, -1, 2, 2), e.restore(), e.globalCompositeOperation = "source-over", i = e.createRadialGradient(n / 2 - .25 * s, s / 2 - .25 * s, 0, n / 2, s / 2, .45 * s), i.addColorStop(0, "rgba(0,0,0,0)"), i.addColorStop(.5, "rgba(0,0,0,0)"), i.addColorStop(1, "rgba(0,0,0,.5)"), e.fillStyle = i, e.beginPath(), e.arc(n / 2, s / 2, .45 * s, 0, 2 * Math.PI, !0), e.fill(), e.globalCompositeOperation = "destination-over", e.translate(n / 2, s / 2), e.scale(n / 2, s / 2), i = e.createRadialGradient(0, 0, 0, 0, 0, 1), i.addColorStop(.7, "rgba(0,0,0,1)"), i.addColorStop(1, "rgba(0,0,0,0)"), e.fillStyle = i, e.fillRect(-1, -1, 2, 2), this.resize ? (t = document.createElement("canvas"), t.width = this.size, t.height = this.size / 2, t.getContext("2d").drawImage(this.canvas, 0, 0, this.size, this.size / 2), this.canvas = t) : void 0, this.callbackCalled === false && this.callback(this.canvas, this.info, this.rid);
+            if (null == this.canvas && (this.canvas = document.createElement("canvas")), n = this.canvas.width = 2 * this.size, s = this.canvas.height = this.size, e = this.canvas.getContext("2d"), e.clearRect(0, 0, this.canvas.width, this.canvas.height), "_0x27G5C" !== this.info.id) return e.fillStyle = "#000", e.beginPath(), e.arc(n / 2, s / 2, s / 2, 0, 2 * Math.PI, !0), e.fill(), e.beginPath(), e.moveTo(.05 * n, .25 * s), e.lineTo(.05 * n, .75 * s), e.lineTo(n / 2, .9 * s), e.lineTo(.95 * n, .75 * s), e.lineTo(.95 * n, .25 * s), e.lineTo(n / 2, .1 * s), e.closePath(), e.fill(), e.lineWidth = .07 * s, e.globalCompositeOperation = "destination-out", e.strokeStyle = "#000", e.beginPath(), e.arc(n / 2, s / 2, .6 * s, 0, 2 * Math.PI, !0), e.stroke(), this.drawMaterial(e, n, s), this.drawIcon(e, n, s), this.drawLaser(e, n, s), e.globalCompositeOperation = "source-atop", e.save(), e.translate(n / 2, s / 2), e.scale(n / 2, s / 2), i = e.createRadialGradient(0, 0, 0, 0, 0, 1), i.addColorStop(0, "rgba(255,255,255,.2)"), i.addColorStop(1, "rgba(0,0,0,.2)"), e.fillStyle = i, e.fillRect(-1, -1, 2, 2), e.restore(), e.globalCompositeOperation = "source-over", i = e.createRadialGradient(n / 2 - .25 * s, s / 2 - .25 * s, 0, n / 2, s / 2, .45 * s), i.addColorStop(0, "rgba(0,0,0,0)"), i.addColorStop(.5, "rgba(0,0,0,0)"), i.addColorStop(1, "rgba(0,0,0,.5)"), e.fillStyle = i, e.beginPath(), e.arc(n / 2, s / 2, .45 * s, 0, 2 * Math.PI, !0), e.fill(), e.globalCompositeOperation = "destination-over", e.translate(n / 2, s / 2), e.scale(n / 2, s / 2), i = e.createRadialGradient(0, 0, 0, 0, 0, 1), i.addColorStop(.7, "rgba(0,0,0,1)"), i.addColorStop(1, "rgba(0,0,0,0)"), e.fillStyle = i, e.fillRect(-1, -1, 2, 2), this.resize ? (t = document.createElement("canvas"), t.width = this.size, t.height = this.size / 2, t.getContext("2d").drawImage(this.canvas, 0, 0, this.size, this.size / 2), this.canvas = t) : void 0, this.callbackCalled === false && this.callback(this.canvas, this.info, this.rid);
             else this.callback(this.canvas, this.info, this.rid)
         }, t.prototype.drawMaterial = function(t, e, i) {
             var s, l, n, a, o, r, h, O, u, d, c;
@@ -35,8 +35,11 @@ window.initECPSetup = function(initializer){
                     for (l = t.createLinearGradient(0, 0, 0, i), O = Math.min(10, this.size / 10), a = o = 0, u = O - 1; o <= u; a = o += 1) l.addColorStop(a / O, "#000"), l.addColorStop((a + 1) / O, "#888");
                     for (n = t.createLinearGradient(0, 0, 0, i), n.addColorStop(0, "#333"), n.addColorStop(.1, "#888"), a = r = 0, d = O - 1; r <= d; a = r += 1) n.addColorStop((a + .5) / O, "#000"), n.addColorStop(Math.min(1, (a + 1.5) / O), "#888");
                     break;
+                case "zinc":
+                    l = t.createLinearGradient(0, 0, 0, i), l.addColorStop(0, "#EEE"), l.addColorStop(1, "#666");
+                    break;
                 default:
-                    l = t.createLinearGradient(0, 0, 0, i), l.addColorStop(0, "#EEE"), l.addColorStop(1, "#666")
+                    l = t.createLinearGradient(0, 0, 0, i), l.addColorStop(0, "hsl(0,100%,80%)"), l.addColorStop(.5, "hsl(60,100%,80%)"), l.addColorStop(.5, "hsl(120,100%,80%)"), l.addColorStop(1, "hsl(180,100%,80%)");
             }
             if (t.globalCompositeOperation = "source-atop", t.fillStyle = l, "carbon" === this.finish) {
                 for (a = h = 0, c = 4 * O - 1; h <= c; a = h += 1) t.fillStyle = a % 2 == 0 ? l : n, t.fillRect(a * e / (4 * O), 0, e / (4 * O), i);
@@ -277,6 +280,18 @@ let ECPIcons = {
         "active": true,
         "decoration": {"unicode": 126, "fill": "#246", "stroke": "#FFF"}
     },
+    "custom": {
+        "name": "Custom",
+        "id": "custom",
+        "active": true,
+        "decoration": {"unicode": 56, "fill": "hsl(50,100%,50%)", "stroke": "hsl(0,50%,30%)"}
+    },
+    "blank": {
+        "name": "Blank",
+        "id": "blank",
+        "active": true,
+        "decoration": { "unicode": 56, "fill": "hsla(50,100%,50%,0)", "stroke": "hsl(0,50%,30%,0)" }
+    },
     "pirate": {
         "name": "Pirate",
         "id": "pirate",
@@ -332,7 +347,6 @@ let ECPIcons = {
     "gamepedia": {"name": "Gamepedia", "id": "gamepedia", "active": true, "url": "gamepedia.png"},
     "discord": {"name": "Discord", "id": "discord", "active": true, "url": "discord.png"},
     "medic": {"name": "Medic", "id": "medic", "active": true, "url": "medic.jpg"},
-    "blank": {"name": "Blank", "id": "blank", "active": true},
     "seasonal": {"name": "Seasonal", "id": "seasonal", "active": true, "url": "seasonal.png"},
     "halloween_2021": {
         "name": "Seasonal - Halloween 2021",
@@ -400,7 +414,7 @@ window.getECPIcon = function (custom) {
             return;
         }
         let query = ECPIcons[custom.badge];
-        if (!query) query = ECPIcons["star"];
+        if (!query) query = ECPIcons["custom"];
         ECPIconManager.loadBadge(64, query, custom.finish, custom.laser, Math.random(), (canvas) => {
             setTimeout(() => {
                 let url = canvas.toDataURL();
