@@ -75,46 +75,23 @@ class SystemListManager {
                 playerList.push(player.player_name);
             }
     
-            // Initialiser les objets de regroupement
-            let clanToCount = {};
-            for (let clanName in clans) {
-                clanToCount[clanName] = 0;
-            }
-    
-            // Parcourir les noms des joueurs pour les regrouper par clan
-            for (let playerName of playerList) {
-                let foundClan = null;
-                for (let clanName in clans) {
-                    let clan = clans[clanName];
-                    for (let tag of clan.tags) {
-                        if (playerName.includes(tag)) {
-                            foundClan = clanName;
-                            break;
-                        }
-                    }
-                    if (foundClan) {
-                        break;
-                    }
-                }
-                if (foundClan) {
-                    clanToCount[foundClan]++;
-                }
-            }
-    
-            // Construire le HTML des tags avec les comptes
-            let tagsArray = [];
-            for (let clanName in clanToCount) {
-                let count = clanToCount[clanName];
-                if (count > 0) {
-                    let color = clans[clanName].color;
-                    tagsArray.push(`<span style="color: ${color}; font-weight: bold;">${clanName} (${count})</span>`);
-                }
-            }
-    
-            if (tagsArray.length > 0) {
-                tagsHtml = `<div>${tagsArray.join(', ')}</div>`;
+            // Utiliser la fonction groupPlayersByClan pour regrouper les joueurs
+        const { clanToPlayers, otherPlayers } = groupPlayersByClan(playerList, clans);
+
+        // Construire le HTML des tags avec les comptes
+        let tagsArray = [];
+        for (let clanName in clanToPlayers) {
+            let count = clanToPlayers[clanName].length;
+            if (count > 0) {
+                let color = clans[clanName].color;
+                tagsArray.push(`<span style="color: ${color}; font-weight: bold;">${clanName} (${count})</span>`);
             }
         }
+
+        if (tagsArray.length > 0) {
+            tagsHtml = `<div>${tagsArray.join(', ')}</div>`;
+        }
+    }
     
         return `
             <div class="card-body">

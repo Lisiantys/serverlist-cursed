@@ -143,104 +143,88 @@ class SystemReportManager {
                 String(ecpCount);
             }
 
-           // Fonction pour échapper les caractères spéciaux
-           function sanitizePlayerName(playerName) {
-            return playerName
+            // Fonction pour échapper les caractères spéciaux
+            function sanitizePlayerName(playerName) {
+              return playerName
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/\u202E/g, "");
-        }
-
-        // Initialiser les objets de regroupement
-        let clanToPlayers = {};
-        for (let clanName in clans) {
-            clanToPlayers[clanName] = [];
-        }
-
-        let otherPlayers = [];
-
-        // Parcourir les noms des joueurs pour les regrouper par clan
-        for (let playerName of playerList) {
-            let foundClan = null;
-            for (let clanName in clans) {
-                let clan = clans[clanName];
-                for (let tag of clan.tags) {
-                    if (playerName.includes(tag)) {
-                        foundClan = clanName;
-                        break;
-                    }
-                }
-                if (foundClan) {
-                    break;
-                }
             }
-            if (foundClan) {
-                clanToPlayers[foundClan].push(playerName);
-            } else {
-                otherPlayers.push(playerName);
+
+            // Extraire la liste des noms de joueurs
+            let playerListSanitized = playerList.map(playerName => sanitizePlayerName(playerName));
+
+            // Utiliser la fonction groupPlayersByClan pour regrouper les joueurs
+            const { clanToPlayers, otherPlayers } = groupPlayersByClan(playerListSanitized, clans);
+
+            // Construire le HTML des tags avec les comptes
+            let tagsArray = [];
+            for (let clanName in clanToPlayers) {
+              let count = clanToPlayers[clanName].length;
+              if (count > 0) {
+                let color = clans[clanName].color;
+                tagsArray.push(`<span style="color: ${color}; font-weight: bold;">${clanName} (${count})</span>`);
+              }
             }
-        }
 
-        // Construire la chaîne HTML pour les Teams
-        let teamListHTML = '';
-        let hasTaggedPlayers = false;
+            let tagsHtml = '';
+            if (tagsArray.length > 0) {
+              tagsHtml = `<div>${tagsArray.join(', ')}</div>`;
+            }
 
-        // Liste des clans dans l'ordre souhaité
-        let clanNames = [
-            "ℭ", "GOF", "NUB", "ƲԼƲ", "S&C", "FR", "PTP", "Cᴋ",
-            "ƬƝⱮ", "ALONE", "₲Ⱡ", "7҉", "ɆØ₮", "☪", "SᄅF̶", "ΛꞨΞ",
-            "KOR", "Ⱡ₳₣", "F4", "F℣", "G4", "ARC", "SR", "🔥IŞ", "VN",
-            "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ", "ROW", "LOV", "TDR", //"SOLO"
-            // Ajoutez les autres clans si nécessaire
-        ];
+            // Construire la chaîne HTML pour les Teams
+            let teamListHTML = '';
+            let hasTaggedPlayers = false;
 
-        for (let clanName of clanNames) {
-            let playersWithClan = clanToPlayers[clanName];
-            if (playersWithClan && playersWithClan.length > 0) {
+            // Liste des clans dans l'ordre souhaité
+            let clanNamesOrder = [
+              "ℭ", "GOF", "NUB", "ƲԼƲ", "S&C", "FR", "PTP", "Cᴋ",
+              "ƬƝⱮ", "ALONE", "₲Ⱡ", "7҉", "ɆØ₮", "☪", "SᄅF̶", "ΛꞨΞ",
+              "KOR", "Ⱡ₳₣", "F4", "F℣", "G4", "ARC", "SR", "🔥IŞ", "VN",
+              "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ", "ROW", "LOV", "TDR", //"SOLO"
+              // Ajoutez les autres clans si nécessaire
+            ];
+
+            for (let clanName of clanNamesOrder) {
+              let playersWithClan = clanToPlayers[clanName];
+              if (playersWithClan && playersWithClan.length > 0) {
                 hasTaggedPlayers = true;
                 let color = clans[clanName].color;
                 let styledTag = `<span style="color: ${color} !important; font-weight: bolder !important;">${clanName} (${playersWithClan.length}):</span>`;
 
                 let playerNames = playersWithClan
-                    .map((playerName) => {
-                        let sanitizedPlayerName = sanitizePlayerName(playerName);
-                        return `<span style="color: ${color} !important; font-weight: bolder !important;">${sanitizedPlayerName}</span>`;
-                    })
-                    .join(", ");
+                  .map((playerName) => {
+                    return `<span style="color: ${color} !important; font-weight: bolder !important;">${playerName}</span>`;
+                  })
+                  .join(", ");
 
                 teamListHTML += `<div>${styledTag} ${playerNames}</div>`;
+              }
             }
-        }
 
-        // Mettre à jour la section Teams
-        document.getElementById("SR_TeamList").innerHTML = teamListHTML;
+            // Mettre à jour la section Teams
+            document.getElementById("SR_TeamList").innerHTML = teamListHTML;
 
-        // Afficher ou masquer la section Teams
-        if (hasTaggedPlayers) {
-            document.getElementById("SR_TeamsSection").style.display = "";
-        } else {
-            document.getElementById("SR_TeamsSection").style.display = "none";
-        }
+            // Afficher ou masquer la section Teams
+            if (hasTaggedPlayers) {
+              document.getElementById("SR_TeamsSection").style.display = "";
+            } else {
+              document.getElementById("SR_TeamsSection").style.display = "none";
+            }
 
-        // Construire la chaîne HTML pour les joueurs sans tag
-        let playerListHTML = '';
-        if (otherPlayers.length > 0) {
-            let otherPlayerNames = otherPlayers
-                .map((playerName) => {
-                    let sanitizedPlayerName = sanitizePlayerName(playerName);
-                    return sanitizedPlayerName;
-                })
-                .join(", ");
+            // Construire la chaîne HTML pour les joueurs sans tag
+            let playerListHTML = '';
+            if (otherPlayers.length > 0) {
+              let otherPlayerNames = otherPlayers.join(", ");
+              playerListHTML += `<div>${otherPlayerNames}</div>`;
+            }
 
-            playerListHTML += `<div>${otherPlayerNames}</div>`;
-        }
+            // Mettre à jour la section Players
+            document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
 
-        // Mettre à jour la section Players
-        document.getElementById("SR_PlayerList").innerHTML = playerListHTML;
-
-        // Mettre à jour le compteur de joueurs sans tags
-        document.getElementById("SR_PlayerCount").innerText = otherPlayers.length;
-}
+            // Mettre à jour le compteur de joueurs sans tags
+            document.getElementById("SR_PlayerCount").innerText = otherPlayers.length;
+          }
         }
       );
     } else {
