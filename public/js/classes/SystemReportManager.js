@@ -43,10 +43,10 @@ class SystemReportManager {
 
     const clans = {
       "GOF": {
-        tags: ["GOF", "ɢᴏҒ"],
+        tags: ["GOF", "ɢᴏҒ", "ɢᴏꜰ"],
         color: "#00FF00", // Lime
       },
-      "FЯ": {
+      "FR": {
         tags: ["FЯ", "ҒꝚ"],
         color: "#4682B4", // SteelBlue
       },
@@ -59,12 +59,16 @@ class SystemReportManager {
         color: "#D3D3D3", // LightGray
       },
       "F4": {
-        tags: ["⌥Ƒᔦ", "⌥Ƒ౺"],
+        tags: ["⌥Ƒᔦ", "⌥Ƒ౺", "F4"],
         color: "#FF8C00", // DarkOrange
       },
       "PTP": {
         tags: ["PTP", "P͠T͠P͠"],
         color: "#32CD32",
+      },
+      "SR": { 
+        tags: ["​ꞨⱤ"],
+        color: "#808080"
       },
       // Ajoutez les autres clans avec leurs tags correspondants
       "ᘜA̷ᖇ": { tags: ["ᘜA̷ᖇ"], color: "#FFF000" },
@@ -85,8 +89,7 @@ class SystemReportManager {
       "Ⱡ₳₣": { tags: ["Ⱡ₳₣"], color: "#9ACD32" },
       "F℣": { tags: ["F℣"], color: "#FF6347" },
       "G4": { tags: ["G4"], color: "#4B0082" },
-      "ΛꞚC": { tags: ["ΛꞚC"], color: "#20B2AA" },
-      "SR": { tags: ["SR"], color: "#808080" },
+      "ARC": { tags: ["ΛꝚC"], color: "#20B2AA" },
       "L̴N̴D̴": { tags: ["L̴N̴D̴"], color: "#A9A9A9" },
       "ȻS": { tags: ["ȻS"], color: "#00F0DC" },
       "YΛ": { tags: ["YΛ"], color: "#FFFFE0" },
@@ -95,6 +98,8 @@ class SystemReportManager {
       "₩ØȻ": { tags: ["₩ØȻ"], color: "#F00F03" },
       "ROW": { tags: ["RᴏW"], color: "#A6A6A6" },
       "LOV":  { tags: ["LⓄV"], color: "#FFC0CB" },
+      "TDR": { tags: ["ƬDЯ", "TDR"], color: "#FFF000" },
+      //"SOLO": { tags: ["ՖՕʟ☪"], color: "grey" },
     };
 
     const self = this;
@@ -244,10 +249,10 @@ class SystemReportManager {
 
         // Liste des clans dans l'ordre souhaité
         let clanNames = [
-            "ℭ", "GOF", "NUB", "ƲԼƲ", "S&C", "FЯ", "PTP", "P͠T͠P͠", "Cᴋ",
+            "ℭ", "GOF", "NUB", "ƲԼƲ", "S&C", "FR", "PTP", "Cᴋ",
             "ƬƝⱮ", "ALONE", "₲Ⱡ", "7҉", "ɆØ₮", "☪", "SᄅF̶", "ΛꞨΞ",
-            "KOR", "Ⱡ₳₣", "⌥Ƒ", "F℣", "G4", "ΛꞚC", "SR", "🔥IŞ", "VN",
-            "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ", "ROW", "LOV"
+            "KOR", "Ⱡ₳₣", "F4", "F℣", "G4", "ARC", "SR", "🔥IŞ", "VN",
+            "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ", "ROW", "LOV", "TDR", //"SOLO"
             // Ajoutez les autres clans si nécessaire
         ];
 
