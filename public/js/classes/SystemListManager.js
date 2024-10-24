@@ -1,5 +1,5 @@
 class SystemListManager {
-    constructor(preferencesManager, systemListProvider, systemReportManager) {
+    constructor(preferencesManager, systemListProvider, systemReportManager, playerInfoCache) {
         const self = this;
 
         self.preferencesManager = preferencesManager;
@@ -11,7 +11,7 @@ class SystemListManager {
         self.systemListElement = document.getElementById("systemsList");
 
         //Récupération joueurs pour afficher tag + count sur chaque card/systeme
-        this.playerInfoBySystemId = {};
+        self.playerInfoCache = playerInfoCache;
     }
 
     fetchPlayerInfo(system) {
@@ -65,8 +65,8 @@ class SystemListManager {
             modeText = system.mode === "modding" ? `${Translation.modes[system.mode]} - ${Translation.mods[system.mod_id]}` : Translation.modes[system.mode];
         }
     
-        let playerInfo = this.playerInfoBySystemId[`${system.id}@${system.address}`];
-    
+        let playerInfo = this.playerInfoCache.cache[`${system.id}@${system.address}`];
+
         let tagsHtml = '';
         if (playerInfo && playerInfo.data && playerInfo.data.players) {
             // Traiter les données des joueurs pour obtenir les tags et les comptes
@@ -74,25 +74,25 @@ class SystemListManager {
             for (let player of Object.values(playerInfo.data.players)) {
                 playerList.push(player.player_name);
             }
-    
-            // Utiliser la fonction groupPlayersByClan pour regrouper les joueurs
-        const { clanToPlayers, otherPlayers } = groupPlayersByClan(playerList, clans);
 
-        // Construire le HTML des tags avec les comptes
-        let tagsArray = [];
-        for (let clanName in clanToPlayers) {
-            let count = clanToPlayers[clanName].length;
-            if (count > 0) {
-                let color = clans[clanName].color;
-                tagsArray.push(`<span style="color: ${color}; font-weight: bold;">${clanName} (${count})</span>`);
+            // Utiliser la fonction groupPlayersByClan pour regrouper les joueurs
+            const { clanToPlayers, otherPlayers } = groupPlayersByClan(playerList, clans);
+
+            // Construire le HTML des tags avec les comptes
+            let tagsArray = [];
+            for (let clanName in clanToPlayers) {
+                let count = clanToPlayers[clanName].length;
+                if (count > 0) {
+                    let color = clans[clanName].color;
+                    tagsArray.push(`<span style="color: ${color}; font-weight: bold;">${clanName} (${count})</span>`);
+                }
+            }
+
+            if (tagsArray.length > 0) {
+                tagsHtml = `<div>${tagsArray.join(', ')}</div>`;
             }
         }
 
-        if (tagsArray.length > 0) {
-            tagsHtml = `<div>${tagsArray.join(', ')}</div>`;
-        }
-    }
-    
         return `
             <div class="card-body">
                 <h3 class="mb-0">${system.name} <span class="float-end">${Math.floor(system.time/60)} min</span></h3>
@@ -114,13 +114,21 @@ class SystemListManager {
             currentIds.add(system.id.toString());
             self.systemsById[system.id.toString()] = system;
 
+            // Fetch player info for the system
+            self.playerInfoCache.fetchPlayerInfo(system).then((info) => {
+                // Update the card if it exists
+                if (self.systemCards[system.id.toString()]) {
+                    self.systemCards[system.id.toString()].innerHTML = self.getCardHTML(system);
+                }
+            }).catch((error) => {
+                console.error(`Erreur lors de la récupération des informations des joueurs pour le système ${system.id}@${system.address}:`, error);
+            });
+
             if (self.systemCards.hasOwnProperty(system.id.toString())) {
-                // If system is already on the list, update its info
-
+                // Mise à jour de la carte existante
                 if (self.systemCards[system.id.toString()]) self.systemCards[system.id.toString()].innerHTML = self.getCardHTML(system);
-            } else if (!self.systemCards.hasOwnProperty(system.id.toString())) {
-                // If system isn't on the list, create a new card for it
-
+            } else {
+                // Création d'une nouvelle carte pour le système
                 let card = document.createElement("div");
                 card.classList.add("card");
                 card.classList.add("system-list-item");
@@ -135,30 +143,19 @@ class SystemListManager {
                     });
                 }
 
-                card.onmouseover = () => {
-                    // Pre-render and pre-fetch player list to make it "appear" quicker
-
-
-                    self.fetchPlayerInfo(system);
-
-                    // self.systemReportManager.prefetch(() => {
-                    //     return self.systemsById[system.id.toString()];
-                    // });
-                }
-
                 self.systemListElement.prepend(card);
 
                 self.systemCards[system.id.toString()] = card;
 
-                /* Notify of new system if user has it enabled */
+                /* Notification pour un nouveau système si l'utilisateur l'a activé */
                 if (document.getElementById("newServerAlert").checked) {
-                    (async() => {
+                    (async () => {
                         let permission = Notification.permission;
                         if (["denied", "default"].includes(permission)) {
                             return;
                         }
                         let notification = new Notification('New Server Alert!');
-                        document.addEventListener('visibilitychange', function() {
+                        document.addEventListener('visibilitychange', function () {
                             if (document.visibilityState === 'visible') {
                                 notification.close();
                             }
@@ -179,7 +176,7 @@ class SystemListManager {
             }
         }
 
-        // For some reason, self.systemListElement.children sometimes doesn't include all the cards
+        // Parfois, self.systemListElement.children n'inclut pas toutes les cartes
         for (let [id, card] of Object.entries(self.systemCards)) {
             if (!currentIds.has(id)) {
                 card.remove();
@@ -188,7 +185,6 @@ class SystemListManager {
         }
 
         self._sort();
-
     }
 
     _sort() {
@@ -196,6 +192,6 @@ class SystemListManager {
 
         [...self.systemListElement.children].sort((a, b) => {
             return self.systemsById[a.dataset.system].time > self.systemsById[b.dataset.system].time ? 1 : -1;
-        }).forEach(node=>self.systemListElement.appendChild(node));
+        }).forEach(node => self.systemListElement.appendChild(node));
     }
 }

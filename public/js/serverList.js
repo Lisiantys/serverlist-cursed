@@ -1,13 +1,19 @@
+// serverList.js
 
 let preferencesManager = new PreferencesManager();
+
+// Créer une instance de PlayerInfoCache
+let playerInfoCache = new PlayerInfoCache();
 
 let systemListProvider = new SimStatusListProvider({
     endpoint: `${window.siteConfig["static-api-provider"]}simstatus.json`
 });
 
-let systemReportManager = new SystemReportManager(preferencesManager);
+// Passer playerInfoCache à SystemReportManager
+let systemReportManager = new SystemReportManager(preferencesManager, playerInfoCache);
 
-let systemListManager = new SystemListManager(preferencesManager, systemListProvider, systemReportManager);
+// Passer playerInfoCache à SystemListManager
+let systemListManager = new SystemListManager(preferencesManager, systemListProvider, systemReportManager, playerInfoCache);
 
 let refreshList = function() {
     systemListManager._tick();
