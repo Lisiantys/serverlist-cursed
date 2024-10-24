@@ -493,13 +493,20 @@ html, body {
     }
   }
 
-h1{
-    font-size: 40px !important;
+h1, h2{
   font-weight: 600  !important;
   background-image: linear-gradient(to left, #857878, #ffffff)  !important;
   color: transparent  !important;
   background-clip: text   !important;
   -webkit-background-clip: text  !important;
+}
+
+h1{
+  font-size: 40px !important;
+}
+
+h2{
+  font-size: 13px !important;
 }
   
 
