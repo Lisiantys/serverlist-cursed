@@ -56,4 +56,5 @@ const clans = {
     "LOV":  { tags: ["LⓄV"], color: "#FFC0CB" },
     "TDR": { tags: ["ƬDЯ", "TDR"], color: "#FFF000" },
     "SOLO": { tags: ["ՖՕʟ☪"], color: "grey" },
+    "HELL": { tags: ["『HELL』", "HELL"], color: "#780867" },
   };
