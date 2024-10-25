@@ -1,5 +1,4 @@
-function groupPlayersByClan(playerList, clans) {
-    // Initialiser les objets de regroupement
+function groupPlayersByClan(playerList, clans) { 
     let clanToPlayers = {};
     for (let clanName in clans) {
         clanToPlayers[clanName] = [];
@@ -7,7 +6,6 @@ function groupPlayersByClan(playerList, clans) {
 
     let otherPlayers = [];
 
-    // Parcourir les noms des joueurs pour les regrouper par clan
     for (let playerName of playerList) {
         let foundClan = null;
         for (let clanName in clans) {

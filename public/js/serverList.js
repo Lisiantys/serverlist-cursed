@@ -63,44 +63,53 @@ document.getElementById("shareCustomGame").addEventListener("click", async() => 
 
 function updateGlobalClanTaggedPlayersList() {
     const systems = systemListManager.getAllSystems();
+    const playerSystemMap = {}; // Map pour associer les noms des joueurs aux systemId
     const allPlayerPromises = systems.map(system => {
         return playerInfoCache.fetchPlayerInfo(system)
             .then(playerInfo => {
                 if (playerInfo && playerInfo.players) {
-                    return Object.values(playerInfo.players).map(player => player.player_name);
+                    const players = Object.values(playerInfo.players).map(player => {
+                        const playerName = player.player_name;
+                        // Associer le nom du joueur au systemId
+                        if (!playerSystemMap[playerName]) {
+                            playerSystemMap[playerName] = system.id;
+                        } else {
+                            // Si le nom du joueur existe déjà, créer un tableau de systemId
+                            if (!Array.isArray(playerSystemMap[playerName])) {
+                                playerSystemMap[playerName] = [playerSystemMap[playerName]];
+                            }
+                            playerSystemMap[playerName].push(system.id);
+                        }
+                        return playerName;
+                    });
+                    return players;
                 } else {
                     return [];
                 }
             })
             .catch(error => {
-                console.error(`Erreur lors de la récupération des joueurs pour le système ${system.id}@${system.address}:`, error);
+                console.error(`Erreur lors de la récupération des joueurs pour le système ${system.id}:`, error);
                 return [];
             });
     });
 
     Promise.all(allPlayerPromises).then(playersArrays => {
         const allPlayers = playersArrays.flat();
-        console.log("Tous les joueurs collectés :", allPlayers);
-
-        renderGlobalClanTaggedPlayers(allPlayers);
+        renderGlobalClanTaggedPlayers(allPlayers, playerSystemMap);
     });
 }
 
-function renderGlobalClanTaggedPlayers(playerList) {
-    console.log("Liste des joueurs :", playerList);
+function renderGlobalClanTaggedPlayers(playerList, playerSystemMap) {
 
     const { clanToPlayers } = groupPlayersByClan(playerList, clans);
-
     const playerListElement = document.getElementById("globalClanTaggedPlayers");
     playerListElement.innerHTML = ''; // Effacer les entrées précédentes
 
-    // Optionnel : définir l'ordre des clans
     const clanNamesOrder = [
         "ℭ", "GOF", "NUB", "ƲԼƲ", "S&C", "FR", "PTP", "Cᴋ",
         "ƬƝⱮ", "ALONE", "₲Ⱡ", "7҉", "ɆØ₮", "☪", "SᄅF̶", "ΛꞨΞ",
         "KOR", "Ⱡ₳₣", "F4", "F℣", "G4", "ARC", "SR", "🔥IŞ", "VN",
         "L̴N̴D̴", "ȻS", "YΛ", "ŁS", "ᘖ࿐", "₩ØȻ", "ROW", "LOV", "TDR", "SOLO", "HELL"
-        // Ajouter d'autres clans si nécessaire
     ];
 
     clanNamesOrder.forEach(clanName => {
@@ -113,10 +122,24 @@ function renderGlobalClanTaggedPlayers(playerList) {
             rowElement.className = "row mb-2"; // Ajoute une marge entre les lignes
 
             players.forEach((playerName, index) => {
+                const systemId = playerSystemMap[playerName];
+
+                let playerLink;
+                if (systemId) {
+                    if (Array.isArray(systemId)) {
+                        // Si le joueur est dans plusieurs systèmes, on utilise le premier
+                        playerLink = `https://starblast.io/#${systemId[0]}`;
+                    } else {
+                        playerLink = `https://starblast.io/#${systemId}`;
+                    }
+                } else {
+                    playerLink = "#";
+                }
+
                 // Crée une colonne Bootstrap pour chaque joueur
                 const playerCol = document.createElement("div");
-                playerCol.className = "col-6";
-                playerCol.innerHTML = `<span style="color: ${color};">${playerName}</span>`;
+                playerCol.className = "col-4"; // Pour 3 colonnes, utiliser col-4
+                playerCol.innerHTML = `<a href="${playerLink}" target="_blank" style="color: ${color}; text-decoration: none;">${playerName}</a>`;
 
                 rowElement.appendChild(playerCol);
 

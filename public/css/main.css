@@ -91,9 +91,14 @@ body {
 }
 
 /* Scroll sur Y pour les sections principales */
-#systemReport, #systemsListContainer, #viewOptions {
+#systemReport, #viewOptions {
   overflow-y: auto;
   height: fit-content;
+}
+
+#systemsListContainer{
+  overflow-y: auto;
+  max-height: 450px !important;
 }
 
 /* Région et Mode en ligne sur mobile */
@@ -557,7 +562,7 @@ h5{
 
 /* Scrollification */
 
-#systemReport, #systemsListContainer, #viewOptions {
+#systemReport, #viewOptions {
     overflow-y: auto;
     height: fit-content;
 }

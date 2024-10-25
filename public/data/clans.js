@@ -35,7 +35,7 @@ const clans = {
     "ƬƝⱮ": { tags: ["ƬƝⱮ"], color: "#FF00FF" },
     "ALONE": { tags: ["ALONE", "Aʟᴏɴᴇ"], color: "#CD853F" },
     "₲Ⱡ": { tags: ["₲Ⱡ"], color: "#1E90FF" },
-    "ℭ": { tags: ["ℭ"], color: "#FF0000" },
+    "ℭ": { tags: ["〘ℭ〙"], color: "#FF0000" },
     "7҉": { tags: ["7҉"], color: "#FFD700" },
     "ɆØ₮": { tags: ["ɆØ₮"], color: "#00FFFF" },
     "☪": { tags: ["『☪』"], color: "#FF69B4" },
@@ -56,5 +56,5 @@ const clans = {
     "LOV":  { tags: ["LⓄV"], color: "#FFC0CB" },
     "TDR": { tags: ["ƬDЯ", "TDR"], color: "#FFF000" },
     "SOLO": { tags: ["ՖՕʟ☪"], color: "grey" },
-    "HELL": { tags: ["『HELL』", "HELL"], color: "#780867" },
+    "HELL": { tags: ["『HELL』"], color: "#780867" },
   };
