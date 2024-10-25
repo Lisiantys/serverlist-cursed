@@ -14,6 +14,10 @@ class SystemListManager {
         self.playerInfoCache = playerInfoCache;
     }
 
+    getAllSystems() {
+        return Object.values(this.systemsById);
+    }
+
     fetchPlayerInfo(system) {
         const self = this;
         let systemId = `${system.id}@${system.address}`;

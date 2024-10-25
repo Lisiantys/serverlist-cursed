@@ -1,3 +1,5 @@
+// PlayerInfoCache.js
+
 class PlayerInfoCache {
     constructor() {
         this.cache = {};
