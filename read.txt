@@ -1,0 +1,36 @@
+Tu viens de pull le projet ?
+
+1- Tu dois d'abord décrypter les fichiers.
+npm decryptFiles.js
+
+2- Ces fichiers décryptés ne sont pas obfusqués, tu vas travailler sur eux. 
+L'application n'utilise que les fichiers en .js obfusqués pour fonctionner.
+
+ Quand tu vas obfusquer ca va créer dans un dossier js-obf, une copie de tes fichiers .js non obfusqués (dans le dossier js)  en fichiers obfusqués (dans le dossier js-obf).
+(Dossier js et js-obf au même niveau)
+node obfuscate.js
+
+3- Tu lances live server. Enjoy ! 
+
+=====================================
+
+Tu veux publier une nouvelle version ?
+
+A - Tu as modifié le JS uniquement ? 
+
+npm encryptFiles.js
+node obfuscate.js
+
+Tu push sur git
+
+B - Tu as modifié uniquement le css ou du .ejs 
+
+npm run build 
+
+C - Tu as modifié du Js + css et / ou .ejs 
+
+npm encryptFiles.js
+node obfuscate.js
+npm run build 
+
+Tu push sur git
