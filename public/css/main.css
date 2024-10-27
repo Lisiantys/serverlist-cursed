@@ -675,3 +675,13 @@ canvas{
     gap: 3rem; 
   }
 }
+
+.closed-system {
+  background-color: #f8d7da; 
+  border-color: #f5c6cb;
+}
+
+.closed-system .card-body {
+  opacity: 0.7;
+}
+
