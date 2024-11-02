@@ -63,10 +63,7 @@
       src="./js-obf/classes/SystemReportManager.js"
     ></script>
     
-    <script
-      type="text/javascript"
-      src="./js-obf/classes/SpectatorV2.js"
-    ></script>
+    <script type="text/javascript" src="./js/classes/SpectatorV2.js"></script>
      
 
     <script type="text/javascript" src="./js-obf/lib/mapGen.js"></script>
@@ -86,7 +83,7 @@
 
     <!-- Baked-in Site Config -->
     <script type="text/javascript">
-      window.siteConfig = {"analytics":{"enabled":false},"mode":"live","live-api-provider":"wss://starblast.dankdmitron.dev/api/","static-api-provider":"https://starblast.dankdmitron.dev/api/","revisionTime":"1730377268"};
+      window.siteConfig = {"analytics":{"enabled":false},"mode":"live","live-api-provider":"wss://starblast.dankdmitron.dev/api/","static-api-provider":"https://starblast.dankdmitron.dev/api/","revisionTime":"1730544037"};
     </script>
   </head>
   <body>
@@ -370,15 +367,12 @@
           </div>
         </div>
 
-        <div class="border border-white rounded-lg system-report-card my-3">
+        <div class="border border-white rounded system-report-card py-3">
           <div class="card-body">
-            <h4 class="text-center text-white mt-4">
-              Active players with clan tags
+            <h4 class="text-center text-white pt-4">
+              Active players - Click on a player to join their game
             </h4>
             <div class="row">
-              <p class="text-center text-white">
-                Click on a player to join his game
-              </p>
               <div class="col">
                 <ul
                   id="globalClanTaggedPlayers"
