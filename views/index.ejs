@@ -63,14 +63,23 @@
       src="./js-obf/classes/SystemReportManager.js"
     ></script>
     <% if (site.mode === "live") { %>
-    <script type="text/javascript" src="./js-obf/classes/SpectatorV2.js"></script>
+    <script
+      type="text/javascript"
+      src="./js-obf/classes/SpectatorV2.js"
+    ></script>
     <% } %> <% if (site.analytics.enabled) { %> <%- include("./index/analytics")
     %> <% } %>
 
     <script type="text/javascript" src="./js-obf/lib/mapGen.js"></script>
-    <script type="text/javascript" src="./js-obf/lib/renderingUtils.js"></script>
+    <script
+      type="text/javascript"
+      src="./js-obf/lib/renderingUtils.js"
+    ></script>
     <script type="text/javascript" src="./js-obf/lib/ecpIcon.js"></script>
-    <script type="text/javascript" src="./js-obf/lib/codemirror.min.js"></script>
+    <script
+      type="text/javascript"
+      src="./js-obf/lib/codemirror.min.js"
+    ></script>
     <script
       type="text/javascript"
       src="./js-obf/lib/codemirror.mode.css.min.js"
@@ -91,7 +100,7 @@
       <nav class="navbar" id="navbar">
         <div class="container-fluid px-0">
           <div class="d-flex flex-column">
-            <h1 class="navbar-brand">ℭursedList v1.3.8</h1>
+            <h1 class="navbar-brand">ℭursedList v1.3.9</h1>
             <h2 class="text-end pe-3">by Adonys</h2>
           </div>
           <a
@@ -308,20 +317,26 @@
           </div>
         </div>
 
-        <div class="card system-report-card my-3">
+        <div class="border border-white rounded-lg system-report-card my-3">
           <div class="card-body">
-            <h4 class="text-center text-white">Active players with clan tags</h4>
+            <h4 class="text-center text-white mt-4">
+              Active players with clan tags
+            </h4>
             <div class="row">
-              <p class="text-center text-white">Click on a player to join his game</p>
+              <p class="text-center text-white">
+                Click on a player to join his game
+              </p>
               <div class="col">
-                <ul id="globalClanTaggedPlayers" class="list-unstyled text-center">
+                <ul
+                  id="globalClanTaggedPlayers"
+                  class="list-unstyled text-center"
+                >
                   <!-- Les joueurs seront ajoutés ici via JavaScript -->
                 </ul>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
