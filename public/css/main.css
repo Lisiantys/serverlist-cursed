@@ -700,3 +700,42 @@ canvas {
   height: 20px;
   vertical-align: middle;
 }
+
+.animated-border {
+  --border-angle: 0turn;
+  --main-bg: conic-gradient(
+    from var(--border-angle),
+    #213,
+    #112 5%,
+    #112 60%,
+    #213 95%
+  );
+
+  border: solid 5px transparent;
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #f00,
+    #f03 99%,
+    transparent
+  );
+
+  background: var(--main-bg) padding-box, var(--gradient-border) border-box,
+    var(--main-bg) border-box;
+  background-position: center center;
+
+  animation: bg-spin 5s linear infinite;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+/* Déclare la propriété personnalisée pour l’animation */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
