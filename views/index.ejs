@@ -41,39 +41,48 @@
 
     <!-- Site JS Libraries -->
 
-    <script src="./js/utils/clans.js"></script>
-    <script src="./js/utils/playerUtils.js"></script>
-    <script src="./js/classes/PlayerInfoCache.js"></script>
+    <script src="./js-obf/utils/clans.js"></script>
+    <script src="./js-obf/utils/playerUtils.js"></script>
+    <script src="./js-obf/classes/PlayerInfoCache.js"></script>
 
     <script
       type="text/javascript"
-      src="./js/classes/PreferencesManager.js"
+      src="./js-obf/classes/PreferencesManager.js"
     ></script>
     <script
       type="text/javascript"
-      src="./js/classes/SimStatusListProvider.js"
+      src="./js-obf/classes/SimStatusListProvider.js"
     ></script>
-    <script type="text/javascript" src="./js/translation.js"></script>
+    <script type="text/javascript" src="./js-obf/translation.js"></script>
     <script
       type="text/javascript"
-      src="./js/classes/SystemListManager.js"
+      src="./js-obf/classes/SystemListManager.js"
     ></script>
     <script
       type="text/javascript"
-      src="./js/classes/SystemReportManager.js"
+      src="./js-obf/classes/SystemReportManager.js"
     ></script>
     <% if (site.mode === "live") { %>
-    <script type="text/javascript" src="./js/classes/SpectatorV2.js"></script>
+    <script
+      type="text/javascript"
+      src="./js-obf/classes/SpectatorV2.js"
+    ></script>
     <% } %> <% if (site.analytics.enabled) { %> <%- include("./index/analytics")
     %> <% } %>
 
-    <script type="text/javascript" src="./js/lib/mapGen.js"></script>
-    <script type="text/javascript" src="./js/renderingUtils.js"></script>
-    <script type="text/javascript" src="./js/lib/ecpIcon.js"></script>
-    <script type="text/javascript" src="./js/lib/codemirror.min.js"></script>
+    <script type="text/javascript" src="./js-obf/lib/mapGen.js"></script>
     <script
       type="text/javascript"
-      src="./js/lib/codemirror.mode.css.min.js"
+      src="./js-obf/lib/renderingUtils.js"
+    ></script>
+    <script type="text/javascript" src="./js-obf/lib/ecpIcon.js"></script>
+    <script
+      type="text/javascript"
+      src="./js-obf/lib/codemirror.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./js-obf/lib/codemirror.mode.css.min.js"
     ></script>
 
     <!-- Baked-in Site Config -->
@@ -387,7 +396,7 @@
     </div>
 
     <!-- Site JS Scripts -->
-    <script type="text/javascript" src="./js/ui.js"></script>
-    <script type="text/javascript" src="./js/serverList.js"></script>
+    <script type="text/javascript" src="./js-obf/ui.js"></script>
+    <script type="text/javascript" src="./js-obf/serverList.js"></script>
   </body>
 </html>
